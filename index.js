@@ -8,11 +8,10 @@ const client = new Discord.Client({
     ]
 })
 
-const prefix = "-";
-
+//const prefix = "-";
 
 client.on("ready", () => {
-    console.log(`Logged in as ${client.user.tag}`);
+    console.log(`${client.user.tag} is online!`);
 })
 
 client.on("messageCreate", msg =>{
@@ -38,7 +37,23 @@ client.on("messageCreate", msg =>{
     }
     if(msg.content == "leo"){
         msg.reply("leo du hs");
-    }    
+    }
+    if(msg.content == "vucko"){
+        msg.reply("vucko der hs isch der breiteste");
+    } 
+    if(msg.content == "todic"){
+        msg.reply("todic der hs muss cutten");
+    }
+    if(msg.content == "max"){
+        msg.reply("max du geiler hund");
+    }
+    if(msg.content == "dc?"){
+        msg.channel.send("kond discord");
+        msg.channel.send("kond discord");
+        msg.channel.send("kond discord");
+        msg.channel.send("kond discord");
+        msg.channel.send("kond discord");
+    }      
 })
 
 client.login(process.env.TOKEN);

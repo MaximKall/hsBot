@@ -1,1 +1,1 @@
-"# hsBot" 
+Welcome to hsBot!
