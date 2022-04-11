@@ -4,34 +4,20 @@ require("dotenv").config()
 const client = new Discord.Client({
     intents: [
         "GUILDS",
-        "GUILD_MESSAGES"
+        "GUILD_MESSAGES",
+        "GUILD_MEMBERS"
     ]
 })
 
-//const prefix = "-";
+const WelcomeChannelId = "963105491964285010"
+
+const generateImage = require("./generateImage")
 
 client.on("ready", () => {
     console.log(`${client.user.tag} is online!`);
 })
 
-client.on("messageCreate", msg =>{
-/*    if(!msg.content.startsWith(prefix) || msg.author.client) return;
-
-    const args = msg.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    if(command === "ping"){
-        msg.reply("ping");
-    }
-    else if(command == "flo"){
-        msg.reply("florin du hs");
-    }
-    else if(command == "leo"){
-        msg.reply("leo du hs");
-    }
-    else if(command == "max"){
-        msg.reply("max du geiler");
-    }*/
+client.on("messageCreate", (msg) =>{
     if(msg.content == "flo"){
         msg.reply("florin du hs");
     }
@@ -54,6 +40,14 @@ client.on("messageCreate", msg =>{
         msg.channel.send("kond discord");
         msg.channel.send("kond discord");
     }      
+})
+
+client.on("guildMemberAdd", async (member) => {
+    const img = await generateImage(member)
+    member.guild.channels.cache.get(WelcomeChannelId).send({
+        content: `<@${member.id}> Welcome to the server!`,
+        files: [img]
+    })
 })
 
 client.login(process.env.TOKEN);
